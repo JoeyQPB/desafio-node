@@ -227,5 +227,5 @@ app.use("/api-docs", swaggerUi.serve);
 app.get("/api-docs", swaggerUi.setup(swaggerDocument));
 
 app.listen(8080, () => {
-  console.log(`Server up at port: 8080`);
+  console.log(`Server up at port: 8080!!`);
 });
