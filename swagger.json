@@ -1,0 +1,338 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "IN8 Challenge API Documentation",
+    "description": "In this documantation you will be able to consult the API end-points and also test all availblw routes.",
+    "contact": {
+      "email": "joey_qpb@hotmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "serves": [
+    {
+      "url": "http://localhost:8080/",
+      "description": "Local Server"
+    }
+  ],
+  "paths": {
+    "/all_notebooks": {
+      "get": {
+        "summary": "get all notebooks",
+        "tags": ["/Notebooks"],
+        "description": "this route gives you access to all Notekoos",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Notebooks"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notebook/{id}": {
+      "get": {
+        "summary": "get a Notebook",
+        "tags": ["/Notebooks"],
+        "description": "this route gives you access to a Notebook",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "description": "Notebook id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Notebooks"
+                }
+              }
+            }
+          }
+        },
+        "404": {
+          "description": "ID not found"
+        }
+      }
+    },
+    "/create_notebook": {
+      "post": {
+        "summary": "Create new notebook",
+        "tags": ["/Notebooks"],
+        "description": "it will be responsible for creating a new notebook",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Notebooks"
+              },
+              "examples": {
+                "New notebook": {
+                  "value": {
+                    "title": "Lenovo",
+                    "srcImg": "url da img",
+                    "price": 0,
+                    "description": {
+                      "screenResolution": "15.6 HD",
+                      "processor": "Celeron N3350 1.1GHz",
+                      "memory": "4GB",
+                      "hardDrive": "128GB SSD",
+                      "operatingSystem": "Windows 10 Home"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Notebook created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Notebooks"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/edit_notebook/{id}": {
+      "patch": {
+        "summary": "edit Notebook",
+        "tags": ["/Notebooks"],
+        "description": "this route allows a root to change the specific Notebook registered in memory",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "description": "Notebook id",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Notebooks"
+              },
+              "examples": {
+                "New notebook": {
+                  "value": {
+                    "title": "new title Lenovo",
+                    "srcImg": "new url da img",
+                    "price": 1,
+                    "description": {
+                      "screenResolution": "new screenResolution",
+                      "processor": "new processor",
+                      "memory": "new memory",
+                      "hardDrive": "new hardDrive",
+                      "operatingSystem": "new operatingSystem"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Notebook edited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Notebooks"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "ID not found"
+          }
+        }
+      }
+    },
+    "/edit_allNotebook/{id}": {
+      "put": {
+        "summary": "edit Notebook",
+        "tags": ["/Notebooks"],
+        "description": "this route allows a root to change the specific Notebook registered in memory",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "description": "Notebook id",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Notebooks"
+              },
+              "examples": {
+                "New notebook": {
+                  "value": {
+                    "title": "new title Lenovo",
+                    "srcImg": "new url da img",
+                    "price": 1,
+                    "description": {
+                      "screenResolution": "new screenResolution",
+                      "processor": "new processor",
+                      "memory": "new memory",
+                      "hardDrive": "new hardDrive",
+                      "operatingSystem": "new operatingSystem"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Notebook edited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Notebooks"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "ID not found"
+          }
+        }
+      }
+    },
+    "/delete_notebook/{id}": {
+      "delete": {
+        "summary": "delete Notebook",
+        "tags": ["/Notebooks"],
+        "description": "delete the specific Notebook registered in memory",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "description": "Notebook id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Notebook deleted",
+            "content": {
+              "application/json": {
+                "mensage": "Item removido",
+                "schema": {
+                  "$ref": "#/components/schemas/Notebooks"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "ID not found"
+          }
+        }
+      }
+    },
+    "/json_file": {
+      "get": {
+        "summary": "get a Json file",
+        "tags": ["/File"],
+        "description": "this route gives you access to all Notekoos in memory repository",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Notebooks"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Something went wrong"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Notebooks": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string",
+            "required": true
+          },
+          "srcImg": {
+            "type": "string",
+            "required": true
+          },
+          "price": {
+            "type": "number",
+            "required": true
+          },
+          "description": {
+            "type": "object",
+            "properties": {
+              "screenResolution": {
+                "type": "string",
+                "required": true
+              },
+              "processor": {
+                "type": "string",
+                "required": true
+              },
+              "memory": {
+                "type": "string",
+                "required": true
+              },
+              "hardDrive": {
+                "type": "string",
+                "required": true
+              },
+              "operatingSystem": {
+                "type": "string",
+                "required": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
